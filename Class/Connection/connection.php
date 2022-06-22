@@ -8,6 +8,7 @@
         private $database;
         private $connection;
 
+        // Function to get information and do the connection
         function __construct() {
             $listdate = $this->dataConnection();
             foreach ($listdate as $key => $value) {
@@ -27,13 +28,14 @@
 
         }
 
+        //Function to get data about connection
         private function dataConnection() {
-            //Get path parent directory
             $direction = dirname(__FILE__);
             $jsondata = file_get_contents($direction . "/" . "config.json");
             return json_decode($jsondata, true);
         }
 
+        //Function to show error, if it's the case
         public function showError($e) {
             echo "Connection failed: " . $e->getMessage();
         }
