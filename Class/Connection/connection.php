@@ -11,6 +11,7 @@
         // Function to get information and do the connection
         function __construct() {
             $listdate = $this->dataConnection();
+
             foreach ($listdate as $key => $value) {
                 $this->$host = $value['host'];
                 $this->$user = $value['user'];
@@ -19,15 +20,13 @@
             }
 
             try {
-                $this->connection = new PDO("mysql:host=$this->host;
-                    dbname=$this->database", $this->user, $this->password
-                );
+                $this->connection = new PDO('mysql:host='.$this->host.';dbname='.$this->database, $this->user, $this->password);
             } catch (PDOException $e) {
                 $this->showError($e);
             }
-
         }
-
+       
+        
         //Function to get data about connection
         private function dataConnection() {
             $direction = dirname(__FILE__);
@@ -38,6 +37,23 @@
         //Function to show error, if it's the case
         public function showError($e) {
             echo "Connection failed: " . $e->getMessage();
+        }
+
+        //Change data to UTF-8
+        private function changeUTF8($array) {
+            array_walk_recursive($array, function(&$item, $key) {
+                if(!mb_detect_encoding($item, 'utf-8', true)) {
+                    $item = utf8_encode($item);
+                }
+            });
+            return $array;
+        }
+
+        public function getData($query) {
+            $result = $this->connection->query($query);
+            $result = $result->fetchAll(PDO::FETCH_ASSOC);
+            $result = $this->changeUTF8($result);
+            return $result;
         }
     }
 

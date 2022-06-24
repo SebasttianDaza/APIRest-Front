@@ -1,18 +1,19 @@
+/*Data Base APIRest*/
 
--- Data Base
+DROP DATABASE IF EXISTS APIRest;
 
 CREATE DATABASE IF NOT EXISTS `APIRest`;
 
 USE `APIRest`;
 
---- Table Principal
+/* Table Principal */
 
-CREATE TABLE `Embarcaciones` (
-    `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `name` varchar(45) NOT NULL,
-    `country` varchar(45) NOT NULL,
-    `continent` varchar(45) NOT NULL,
-    `coordinates` varchar(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `Embarcaciones` (
+    `id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
+    `country` VARCHAR(45) NOT NULL,
+    `continent` VARCHAR(45) NOT NULL,
+    `coordinates` VARCHAR(45) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `Embarcaciones` (
@@ -46,24 +47,24 @@ INSERT INTO `Embarcaciones` (
 ( NULL, 'El Nuevo Día', 'Colombia', 'South America','23,23'),
 ( NULL, 'Globant', 'Colombia', 'South America','24,24');
 
--- ID Embarcaciones 1-24 
+/* ID Embarcaciones 1-24 
 
--- Archicteture Table `usuarios` -- Duenos de las Embarcaciones
+-- Archicteture Table `usuarios` -- Duenos de las Embarcaciones */
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
-    `userID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `userName` varchar(45) NOT NULL,
-    'lastName' varchar(45) NOT NULL,
-    'email' varchar(45) NOT NULL,
-    'embarcacionesID' int(11) NOT NULL,
+    `userID` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `username` VARCHAR(45) NOT NULL,
+    `lastname` VARCHAR(45) NOT NULL,
+    `email` VARCHAR(45) NOT NULL,
+    `embarcacionesID` INT(11) NOT NULL,
     FOREIGN KEY (embarcacionesID) REFERENCES Embarcaciones(id),
     CONSTRAINT UNIQUE (email)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)  ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `usuarios` (
     `userID`,
-    `userName`,
-    `lastName`,
+    `username`,
+    `lastname`,
     `email`,
     `embarcacionesID`
 ) VALUES ( NULL, 'Juan', 'Daza', 'jsebastian@gmail.com', 1),
@@ -85,40 +86,39 @@ INSERT INTO `usuarios` (
 ( NULL, 'Sonia', 'Marsella', 'soniamarsella@tesla.com', 20),
 ( NULL, 'Sandra', 'Gonzalez', 'gonzas@gmail.com', 23);
 
--- ID Embarcaciones 1-18
+/* ID Embarcaciones 1-18
 
--- Archicteture Table `sale` -- Ventas de las embarcaciones
+-- Archicteture Table `sale` -- Ventas de las embarcaciones */
 
 CREATE TABLE IF NOT EXISTS `sale` (
-    `saleID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `embarcacionesID` varchar(45) NOT NULL,
-    `quantity` int(25) NOT NULL,
-    FOREIGN KEY (embarcacionesID) REFERENCES Embarcaciones(id),
-    FOREIGN KEY (userID) REFERENCES usuarios(userID),
+    `saleID` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `embarcacionesID` INT(11) NOT NULL,
+    `quantity` INT(25) NOT NULL,
+    FOREIGN KEY (embarcacionesID) REFERENCES Embarcaciones(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `sale` (
-    `saleID`
-    `embarcacionesID`
+    `saleID`,
+    `embarcacionesID`,
     `quantity`
-) VALUES ( NULL, 1, 5 ),
-( NULL, 2, 10 ),
-( NULL, 4, 12 ),
-( NULL, 3, 3 ),
-( NULL, 5, 12 ),
-( NULL, 7, 16 ),
-( NULL, 22, 13 ),
-( NULL, 19, 2 ),
-( NULL, 20, 30 )
-( NULL, 15, 300 ),
-( NULL, 17, 1231 ),
-( NULL, 10, 2303 ),
-( NULL, 11, 123 ),
-( NULL, 12, 400 ),
-( NULL, 18, 567 ),
-( NULL, 24, 120 ),
-( NULL, 23, 678 ),
+) VALUES ( NULL, 1, 5),
+( NULL, 2, 10),
+( NULL, 4, 12),
+( NULL, 3, 3),
+( NULL, 5, 12),
+( NULL, 7, 16),
+( NULL, 22, 13),
+( NULL, 19, 2),
+( NULL, 20, 30),
+( NULL, 15, 300),
+( NULL, 17, 1231),
+( NULL, 10, 2303),
+( NULL, 11, 123),
+( NULL, 12, 400),
+( NULL, 18, 567),
+( NULL, 24, 120),
+( NULL, 23, 678),
 ( NULL, 8, 1364),
-( NULL, 9, 123 ),
-( NULL, 6, 123 ),
-( NULL, 14, 345 );
+( NULL, 9, 123),
+( NULL, 6, 123),
+( NULL, 14, 345);

@@ -1,8 +1,8 @@
 {
     "conexion": {
-        "host": "localhost",
-        "user": "root",
-        "password": "",
-        "database": "API_Rest"
+        "host": "127.0.0.1:3306",
+        "user": "sebasttiandaza",
+        "password": "sebastianDaza100/#",
+        "database": "APIRest"
     }
 }
