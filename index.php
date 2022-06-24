@@ -3,6 +3,7 @@
 
     $connection = new Connection();
 
-    $query = "SELECT * FROM Embarcaciones";
-    //$result = $connection->getData($query);
+    $query = "INSERT INTO Embarcaciones (id, name, country, continent, coordinates) VALUES (NULL, 'Barco1', 'España', 'Europa', '1,1')";
+    
+    print_r($connection->anyQueryID($query));
 ?>

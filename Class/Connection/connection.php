@@ -13,10 +13,10 @@
             $listdate = $this->dataConnection();
 
             foreach ($listdate as $key => $value) {
-                $this->$host = $value['host'];
-                $this->$user = $value['user'];
-                $this->$password = $value['password'];
-                $this->$database = $value['database'];
+                $this->host = $value['host'];
+                $this->user = $value['user'];
+                $this->password = $value['password'];
+                $this->database = $value['database'];
             }
 
             try {
@@ -49,12 +49,31 @@
             return $array;
         }
 
+        //Function to get data from database
         public function getData($query) {
             $result = $this->connection->query($query);
             $result = $result->fetchAll(PDO::FETCH_ASSOC);
             $result = $this->changeUTF8($result);
             return $result;
         }
+
+        //Function to insert, update or delete data in database
+        public function anyQuery($sqlstr) {
+            $query = $this->connection->query($sqlstr);
+            return $query->rowCount();
+        }
+
+        //Function to insert
+        public function anyQueryID($sqlstr) {
+            $query = $this->connection->query($sqlstr);
+            if($query->rowCount() > 0) {
+                return $this->connection->lastInsertId();
+            } else {
+                return 0;
+            }
+        }
+
+
     }
 
 ?>
