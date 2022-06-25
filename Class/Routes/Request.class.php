@@ -32,6 +32,15 @@
             );
             return $this->response;
         }
+
+        public function error_404() {
+            $this->response["status"] = "error";
+            $this->response["result"] = array(
+                "code" => "404",
+                "message" => "Not found"
+            );
+            return $this->response;
+        }
     }
 
 ?>
