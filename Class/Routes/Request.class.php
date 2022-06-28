@@ -6,6 +6,13 @@
             "result" => array()
         ];
 
+        public function success_200($result) {
+            $this->response["status"] = "ok";
+            $this->response["result"] = $result;
+            return $this->response;
+        }
+
+        // Error for method not allowed
         public function error_405() {
             $this->response["status"] = "error";
             $this->response["result"] = array(
@@ -15,6 +22,7 @@
             return $this->response;
         }
 
+        // Error for bad request
         public function error_200($string = "Data incorrect") {
             $this->response["status"] = "error";
             $this->response["result"] = array(
@@ -24,6 +32,7 @@
             return $this->response;
         }
 
+        // Error for bad request
         public function error_400() {
             $this->response["status"] = "error";
             $this->response["result"] = array(
@@ -33,6 +42,7 @@
             return $this->response;
         }
 
+        // Error for data not found
         public function error_404() {
             $this->response["status"] = "error";
             $this->response["result"] = array(
@@ -40,6 +50,15 @@
                 "message" => "Not found"
             );
             return $this->response;
+        }
+
+        public function error_500() {
+            $this->response["status"] = "error";
+            $this->response["result"] = array(
+                "code" => "500",
+                "message" => "Internal server error"
+            );
+            return $this->response; 
         }
     }
 

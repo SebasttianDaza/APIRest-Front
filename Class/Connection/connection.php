@@ -54,6 +54,7 @@
             $result = $this->connection->query($query);
             $result = $result->fetchAll(PDO::FETCH_ASSOC);
             $result = $this->changeUTF8($result);
+            //Cerrar conexión
             return $result;
         }
 
@@ -73,6 +74,9 @@
             }
         }
 
+        protected function encrypt($string) {
+            return md5($string);
+        }
 
     }
 
