@@ -128,5 +128,38 @@
                 return false;
             }
         }
+
+        public function deleteEmbarcacion($id) {
+            $data = json_decode($id, true);
+            $_Request = new Request();
+
+            if(!isset($data["id"])) {
+                return json_encode($_Request->error_400());
+            } else  {
+                $this->id = $data["id"];
+
+                $result = $this->delete();
+
+                if($result) {
+                    return json_encode($_Request->success_200(array("id" => $this->id, "count" => $result)));
+                } else {
+                    http_response_code(500);
+                    return json_encode($_Request->error_500());
+                }
+            }
+        }
+
+        private function delete() {
+            $query = "DELETE FROM Embarcaciones WHERE id = $this->id";
+
+            $response = parent::anyQuery($query);
+
+            if($response >= 1) {
+                return $response;
+            }
+            if($response < 1) {
+                return false;
+            }
+        }
     }
 ?>

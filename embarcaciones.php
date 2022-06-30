@@ -44,8 +44,15 @@
         http_response_code(200);
         
     } else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
-        echo "DELETE";
+
+        header("Content-Type: application/json");
+        $deleteBody = file_get_contents("php://input");
+        $result = $_Embarcaciones->deleteEmbarcacion($deleteBody);
+        echo $result;
+        http_response_code(200);
+
     } else {
+
         header("Content-Type: application/json");
         echo json_encode($_Request->error_405());
     }
