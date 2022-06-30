@@ -54,14 +54,17 @@
             $result = $this->connection->query($query);
             $result = $result->fetchAll(PDO::FETCH_ASSOC);
             $result = $this->changeUTF8($result);
-            //Cerrar conexión
             return $result;
+            $this->connection = null;
         }
 
         //Function to insert, update or delete data in database
         public function anyQuery($sqlstr) {
             $query = $this->connection->query($sqlstr);
-            return $query->rowCount();
+            //Devuelve el número de filas afectadas
+            $result = $query->rowCount();
+            return $result;
+            $this->connection = null;
         }
 
         //Function to insert
@@ -72,6 +75,7 @@
             } else {
                 return 0;
             }
+            $this->connection = null;
         }
 
         protected function encrypt($string) {
