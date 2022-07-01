@@ -83,6 +83,7 @@
         protected function encrypt($string) {
             return md5($string);
         }
+        
 
     }
 

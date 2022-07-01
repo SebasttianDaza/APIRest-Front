@@ -10,6 +10,7 @@
         private $country = "";
         private $continent = "";
         private $coordinates = "";
+        private $token = "";
 
         public function getListEmbarcaciones($page = 1) {
             $start = 0;
@@ -37,26 +38,44 @@
             $data = json_decode($json, true);
             $_Request = new Request();
 
-            if(!isset($data["name"])
-                ||!isset($data["country"])
-                || !isset($data["continent"])
-                || !isset($data["coordinates"])) {
-                $_Request->httpResponseCode(400);
-                return $this->returnResponseJSON($_Request->error_400());
-            } else{
-                
-                $result = $this->insertEmbarcacion($data);
-
-                if($result) {
-                    $_Request->httpResponseCode(200);
-                    return $this->returnResponseJSON($_Request->success_200(array("id" => $result)));
-                }
-
-                if(!$result) {
-                    $_Request->httpResponseCode(500);
-                    return $this->returnResponseJSON($_Request->error_500());
-                }
+            if(!isset($data["token"])) {
+                return $_Request->returnResponseJSON($_Request->error_401());
             }
+
+            if(isset($data["token"])) {
+                $this->token = $data["token"];
+                $dataToken = $this->searchToken();
+
+                if($dataToken) {
+                    if(!isset($data["name"])
+                        ||!isset($data["country"])
+                        || !isset($data["continent"])
+                        || !isset($data["coordinates"])) {
+                        $_Request->httpResponseCode(400);
+                        return $this->returnResponseJSON($_Request->error_400());
+                    } else{
+                        
+                        $result = $this->insertEmbarcacion($data);
+        
+                        if($result) {
+                            $_Request->httpResponseCode(200);
+                            return $this->returnResponseJSON($_Request->success_200(array("id" => $result)));
+                        }
+        
+                        if(!$result) {
+                            $_Request->httpResponseCode(500);
+                            return $this->returnResponseJSON($_Request->error_500());
+                        }
+                    }
+
+                }
+
+                if(!$dataToken) {
+                    return $_Request->returnResponseJSON($_Request->error_401("Unathorized, token not found or expired"));
+                }
+
+            }
+            
         }
 
         private function insertEmbarcacion($data) {
@@ -185,6 +204,34 @@
 
         public function returnResponseJSON($response) {
             return json_encode($response);
+        }
+
+        private function searchToken() {
+            $query = "SELECT userID, token, status FROM users_token WHERE token = '$this->token' AND status = 'active'";
+            $response = parent::getData($query);
+
+            if($response) {
+                return $response;
+            }
+
+            if(!$response) {
+                return false;
+            }
+        }
+
+        private function updateToken($tokenId) {
+            $date = date("Y-m-d H:i:s");
+            $query = "UPDATE users_token SET date = '$date' WHERE id = $tokenId";
+
+            $response = parent::anyQuery($query);
+
+            if($response >= 1) {
+                return $response;
+            }
+
+            if($response < 1) {
+                return false;
+            }
         }
     }
 ?>

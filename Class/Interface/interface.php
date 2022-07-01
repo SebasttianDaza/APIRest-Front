@@ -17,4 +17,8 @@
         public function getData($query);
         public function showError($e);
     }
+
+    interface RequestClass extends ReturnJson {
+        public function getList($page = 1);
+    }
 ?>

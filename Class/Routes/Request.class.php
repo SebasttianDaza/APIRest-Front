@@ -47,6 +47,15 @@
             return $this->response;
         }
 
+        public function error_401($message = "Unauthorized") {
+            $this->response["status"] = "error";
+            $this->response["result"] = array(
+                "code" => "401",
+                "message" => $message
+            );
+            return $this->response;
+        }
+
         // Error for data not found
         public function error_404() {
             $this->response["status"] = "error";
