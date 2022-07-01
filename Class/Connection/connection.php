@@ -1,6 +1,7 @@
 <?php
 
-    class Connection {
+    require_once "./Class/Interface/interface.php";
+    class Connection implements IConnection {
 
         private $host;
         private $user;
@@ -61,6 +62,7 @@
         //Function to insert, update or delete data in database
         public function anyQuery($sqlstr) {
             $query = $this->connection->query($sqlstr);
+            
             //Devuelve el número de filas afectadas
             $result = $query->rowCount();
             return $result;

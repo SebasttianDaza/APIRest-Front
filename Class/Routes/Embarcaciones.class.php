@@ -1,8 +1,9 @@
 <?php 
     require_once "./Class/Routes/Request.class.php";
     require_once "./Class/Connection/connection.php";
+    require_once "./Class/Interface/interface.php";
 
-    class Embarcaciones extends Connection {
+    class Embarcaciones extends Connection implements ReturnJson {
 
         private $id;
         private $name = "";
@@ -22,14 +23,14 @@
             $query = "SELECT * FROM Embarcaciones LIMIT $start, $count";
             $result = parent::getData($query);
 
-            return json_encode($result);
+            return $this->returnResponseJSON($result);
         }
 
         public function getEmbarcacion($id) {
             $query = "SELECT * FROM Embarcaciones WHERE id = $id";
             $result = parent::getData($query);
 
-            return json_encode($result);
+            return $this->returnResponseJSON($result);
         }
 
         public function createEmbarcacion($json) {
@@ -40,15 +41,20 @@
                 ||!isset($data["country"])
                 || !isset($data["continent"])
                 || !isset($data["coordinates"])) {
-                return json_encode($_Request->error_400());
-            } else  {
+                $_Request->httpResponseCode(400);
+                return $this->returnResponseJSON($_Request->error_400());
+            } else{
                 
                 $result = $this->insertEmbarcacion($data);
 
                 if($result) {
-                    return json_encode($_Request->success_200(array("id" => $result)));
-                } else {
-                    return json_encode($_Request->error_500());
+                    $_Request->httpResponseCode(200);
+                    return $this->returnResponseJSON($_Request->success_200(array("id" => $result)));
+                }
+
+                if(!$result) {
+                    $_Request->httpResponseCode(500);
+                    return $this->returnResponseJSON($_Request->error_500());
                 }
             }
         }
@@ -69,16 +75,22 @@
             $_Request = new Request();
 
             if(!isset($data["id"])) {
-                return json_encode($_Request->error_400());
-            } else  {
+                $_Request->httpResponseCode(400);
+                return $this->returnResponseJSON($_Request->error_400());
+            } 
+            
+            if(isset($data["name"]))  {
                 $this->id = $data["id"];
-                if(isset($data["name"])) { $this->name = $data["name"];}
+                if(isset($data["name"])) $this->name = $data["name"];
+
                 if(isset($data["country"])) { 
                     $this->country = $data["country"];
                 }
+
                 if(isset($data["continent"])) { 
                     $this->continent = $data["continent"];
                 }
+
                 if(isset($data["coordinates"])) { 
                     $this->coordinates = $data["coordinates"];
                 }
@@ -86,9 +98,12 @@
                 $result = $this->updateEmbarcacionData();
 
                 if($result) {
-                    return json_encode($_Request->success_200(array("id" => $this->id, "count" => $result)));
-                } else {
-                    http_response_code(500);
+                    $_Request->httpResponseCode(200);
+                    return $this->returnResponseJSON($_Request->success_200(array("id" => $this->id, "count" => $result)));
+                } 
+                
+                if(!$result) {
+                    $_Request->httpResponseCode(500);
                     return json_encode($_Request->error_500());
                 }
             }
@@ -134,17 +149,23 @@
             $_Request = new Request();
 
             if(!isset($data["id"])) {
-                return json_encode($_Request->error_400());
-            } else  {
+                $_Request->httpResponseCode(400);
+                return $this->returnResponseJSON($_Request->error_400());
+            }
+
+            if(isset($data["id"])) {
                 $this->id = $data["id"];
 
                 $result = $this->delete();
 
                 if($result) {
-                    return json_encode($_Request->success_200(array("id" => $this->id, "count" => $result)));
-                } else {
-                    http_response_code(500);
-                    return json_encode($_Request->error_500());
+                    $_Request->httpResponseCode(200);
+                    return $this->returnResponseJSON($_Request->success_200(array("id" => $this->id, "count" => $result)));
+                } 
+                
+                if(!$result) {
+                    $_Request->httpResponseCode(500);
+                    return $this->returnResponseJSON($_Request->error_500());
                 }
             }
         }
@@ -160,6 +181,10 @@
             if($response < 1) {
                 return false;
             }
+        }
+
+        public function returnResponseJSON($response) {
+            return json_encode($response);
         }
     }
 ?>

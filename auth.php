@@ -20,12 +20,11 @@
         }
 
         header("Content-Type: application/json");
-
-
-        echo json_encode($datos);
+        
+        echo $_Request->returnResponseJSON($datos);
     } else {
 
         header("Content-Type: application/json");
-        echo json_encode($_Request->error_405());
+        echo $_Request->returnResponseJSON($_Request->error_405());
     }
 ?>

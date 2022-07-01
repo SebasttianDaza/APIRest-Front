@@ -1,6 +1,11 @@
 <?php 
 
-    class Request {
+    require_once "./Class/Interface/interface.php";
+    require_once "./Class/Interface/trait.php";
+
+    class Request implements IRequest {
+        use httpRequest;
+
         private $response = [
             "status" => "ok",
             "result" => array()
@@ -59,6 +64,10 @@
                 "message" => "Internal server error"
             );
             return $this->response; 
+        }
+
+        public function returnResponseJSON($response) {
+            return json_encode($response);
         }
     }
 
