@@ -1,17 +1,16 @@
 <?php 
+
     require_once "./Class/Routes/Request.class.php";
     require_once "./Class/Connection/connection.php";
     require_once "./Class/Interface/interface.php";
 
-    class Users extends Connection implements RequestClass  {
-        private $userID;
-        private $username = "";
-        private $lastname = "";
-        private $email = "";
+    class Sales extends Connection implements RequestClass {
+        private $saleID;
         private $embarcacionesID = "";
-        private $token = "";
+        private $quantity = "";
 
-        public function getList($page = 1) {
+        public function getList($page =1) 
+        {
             $_Request = new Request();
             $start = 0;
             $count = 100;
@@ -21,10 +20,11 @@
                 $count = $count * $page;
             }
 
-            $query = "SELECT * FROM usuarios LIMIT $start, $count";
+            $query = "SELECT * FROM sale LIMIT $start, $count";
             $result = parent::getData($query);
 
             if($result) {
+                $_Request->httpResponseCode(200);
                 return $this->returnResponseJSON($result);
             }
 
@@ -34,24 +34,27 @@
             }
         }
 
-        public function getUser($id = 0) {
-            $query = "SELECT * FROM usuarios WHERE userID = $id";
+        public function getSale($id = 0)
+        {
+            $_Request = new Request();
+            $query = "SELECT * FROM sale WHERE saleID = $id";
             $result = parent::getData($query);
 
             if($result) {
+                $_Request->httpResponseCode(200);
                 return $this->returnResponseJSON($result);
             }
 
             if(!$result) {
                 $_Request->httpResponseCode(500);
                 return $this->returnResponseJSON($_Request->error_500());
-            }
+            }    
         }
 
         public function post($json) {
             $data = json_decode($json, true);
             $_Request = new Request();
-            
+
             if(!isset($data["token"])) {
                 return $_Request->returnResponseJSON($_Request->error_401());
             }
@@ -62,42 +65,39 @@
                 $dataToken = $this->searchToken();
 
                 if($dataToken) {
-                    if(!isset($data["username"])
-                        ||!isset($data["lastname"])
-                        || !isset($data["email"])
-                        || !isset($data["embarcacionesID"])) {
+                    if(!isset($data["embarcacionesID"])
+                        ||!isset($data["quantity"])) {
+
                         $_Request->httpResponseCode(400);
-                        return $this->returnResponseJSON($_Request->error_400());
+                        return $_Request->returnResponseJSON($_Request->error_400());
                     } else {
-                        $result = $this->insertUser($data);
+                        $result = $this->insertSale($data);
 
                         if($result) {
                             $_Request->httpResponseCode(200);
-                            return $this->returnResponseJSON($_Request->success_200(array("id" => $result)));
+                            return $_Request->returnResponseJSON($_Request->success_200(array("id" => $result)));
                         }
 
                         if(!$result) {
                             $_Request->httpResponseCode(500);
-                            return $this->returnResponseJSON($this->error_500());
+                            return $_Request->returnResponseJSON($_Request->error_500());
                         }
                     }
                 }
 
                 if(!$dataToken) {
-                    $_Request->httpResponseCode(401);
-                    return $_Request->returnResponseJSON($_Request->error_401());
+                    $_Request->httpResponseCode(500);
+                    return $this->returnResponseJSON($_Request->error_500());
                 }
             }
-
         }
 
-        public function insertUser($data) {
-            $this->username = $data["username"];
-            $this->lastname = $data["lastname"];
-            $this->email = $data["email"];
+        public function insertSale($data) {
             $this->embarcacionesID = $data["embarcacionesID"];
+            $this->quantity = $data["quantity"];
 
-            $query = "INSERT INTO usuarios (username, lastname, email, embarcacionesID) VALUES ('$this->username', '$this->lastname', '$this->email', '$this->embarcacionesID')";
+            $query = "INSERT INTO sale (embarcacionesID, quantity) VALUES ('$this->embarcacionesID', '$this->quantity')";
+            
             $result = parent::anyQueryID($query);
 
             if($result) {
@@ -113,61 +113,51 @@
             $data = json_decode($json, true);
             $_Request = new Request();
 
-            if(!isset($data["userID"])) {
+            if(!isset($data["saleID"])) {
                 $_Request->httpResponseCode(400);
-                return $this->returnResponseJSON($_Request->error_400());
+                return $_Request->returnResponseJSON($_Request->error_401());
             }
 
-            if(isset($data["userID"])) {
-                $this->userID = $data["userID"];
-
-                if(isset($data["username"])) $this->username = $data["username"];
-                if(isset($data["lastname"])) $this->lastname = $data["lastname"];
-                if(isset($data["email"])) $this->email = $data["email"];
+            if(isset($data["saleID"])) {
+                $this->saleID = $data["saleID"];
 
                 if(isset($data["embarcacionesID"])) {
                     $this->embarcacionesID = $data["embarcacionesID"];
                 }
 
-                $result = $this->updateUser();
+                if(isset($data["quantity"])) $this->quantity = $data["quantity"];
+
+                $result = $this->updateSale();
 
                 if($result) {
                     $_Request->httpResponseCode(200);
-                    return $this->returnResponseJSON($_Request->success_200(array("userID" => $this->userID, "count" => $result)));
+                    return $_Request->returnResponseJSON($_Request->success_200(array("userID" => $this->saleID, "count" => $result)));
                 }
 
                 if(!$result) {
                     $_Request->httpResponseCode(500);
-                    return $this->returnResponseJSON($this->error_500());
+                    return $_Request->returnResponseJSON($_Request->error_500());
                 }
+
             }
         }
 
-        public function updateUser() {
-            $query = "UPDATE usuarios SET";
-
-            if($this->username !== "") {
-                $query .= " username = '$this->username', ";
-            }
-
-            if($this->lastname !== "") {
-                $query .= " lastname = '$this->lastname', ";
-            }
-
-            if($this->email !== "") {
-                $query .= " email = '$this->email', ";
-            }
+        public function updateSale() {
+            $query = "UPDATE sale SET ";
 
             if($this->embarcacionesID !== "") {
-                $query .= " embarcacionesID = '$this->embarcacionesID', ";
+                $query .= "embarcacionesID = '$this->embarcacionesID', ";
             }
 
-            //Si solo es uno, quita la ultima coma
+            if($this->quantity !== "") {
+                $query .= "quantity = '$this->quantity', ";
+            }
+
             if(strlen($query) > strlen("UPDATE Embarcaciones SET ")) {
                 $query = substr($query, 0, strlen($query) - 2);
             }
 
-            $query .= " WHERE userID = $this->userID";
+            $query .= "WHERE saleID = $this->saleID";
 
             $result = parent::anyQuery($query);
 
@@ -184,31 +174,31 @@
             $data = json_decode($id, true);
             $_Request = new Request();
 
-            if(!isset($data["userID"])) {
+            if(!isset($data["saleID"])) {
                 $_Request->httpResponseCode(400);
-                return $this->returnResponseJSON($_Request->error_400());
+                return $_Request->returnResponseJSON($_Request->error_401());
             }
 
-            if(isset($data["userID"])) {
-                $this->userID = $data["userID"];
+            if(isset($data["saleID"])) {
+                $this->saleID = $data["saleID"];
 
-                $result = $this->deleteUser();
+                $result = $this->deleteSale();
 
                 if($result) {
                     $_Request->httpResponseCode(200);
-                    return $this->returnResponseJSON($_Request->success_200(array("userID" => $this->userID, "count" => $result)));
+                    return $_Request->returnResponseJSON($_Request->success_200(array("userID" => $this->saleID, "count" => $result)));
                 }
 
                 if(!$result) {
                     $_Request->httpResponseCode(500);
-                    return $this->returnResponseJSON($this->error_500());
+                    return $_Request->returnResponseJSON($_Request->error_500());
                 }
-
             }
         }
 
-        public function deleteUser() {
-            $query = "DELETE FROM usuarios WHERE userID = $this->userID";
+        public function deleteSale() {
+            $query = "DELETE FROM sale WHERE saleID = $this->saleID";
+
             $result = parent::anyQuery($query);
 
             if($result >= 1) {
@@ -251,6 +241,6 @@
                 return false;
             }
         }
-  
     }
+    
 ?>
