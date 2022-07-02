@@ -20,5 +20,8 @@
 
     interface RequestClass extends ReturnJson {
         public function getList($page = 1);
+        public function post($json);
+        public function put($json);
+        public function delete($id);
     }
 ?>

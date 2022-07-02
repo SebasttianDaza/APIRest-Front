@@ -13,6 +13,7 @@
         private $token = "";
 
         public function getListEmbarcaciones($page = 1) {
+            
             $start = 0;
             $count = 100;
 
@@ -45,8 +46,15 @@
             if(isset($data["token"])) {
                 $this->token = $data["token"];
                 $dataToken = $this->searchToken();
+                $tokenId;
 
                 if($dataToken) {
+                    foreach($dataToken as $key => $value) {
+                        $tokenId = $value["tokenID"];
+                    }
+
+                    $this->updateToken($tokenId);
+
                     if(!isset($data["name"])
                         ||!isset($data["country"])
                         || !isset($data["continent"])
@@ -98,7 +106,7 @@
                 return $this->returnResponseJSON($_Request->error_400());
             } 
             
-            if(isset($data["name"]))  {
+            if(isset($data["id"]))  {
                 $this->id = $data["id"];
                 if(isset($data["name"])) $this->name = $data["name"];
 
@@ -207,7 +215,7 @@
         }
 
         private function searchToken() {
-            $query = "SELECT userID, token, status FROM users_token WHERE token = '$this->token' AND status = 'active'";
+            $query = "SELECT tokenID, userID, token, status FROM users_token WHERE token = '$this->token' AND status = 'active'";
             $response = parent::getData($query);
 
             if($response) {
@@ -221,7 +229,7 @@
 
         private function updateToken($tokenId) {
             $date = date("Y-m-d H:i:s");
-            $query = "UPDATE users_token SET date = '$date' WHERE id = $tokenId";
+            $query = "UPDATE users_token SET date = '$date' WHERE tokenID = $tokenId";
 
             $response = parent::anyQuery($query);
 
