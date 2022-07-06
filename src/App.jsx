@@ -3,17 +3,25 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import NavBar from "./Components/Navbar/Navbar.jsx";
+import Title from "./Components/Title/Title.jsx";
 
 const App = () => {
   return (
     <>
-      <Container fluid>
-        <Row lg="2">
-          <Col>
+      <Container className="mt-4">
+        <Row>
+          <Col md lg="2">
             <NavBar />
           </Col>
-          <Col>
-            <h1>Hello World!</h1>
+          <Col md lg="auto">
+            <Container fluid>
+              <Row>
+                <Title title="Ships Rest" />
+              </Row>
+              <Row>
+                <h2>Hello World!</h2>
+              </Row>
+            </Container>
           </Col>
         </Row>
       </Container>
