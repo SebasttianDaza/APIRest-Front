@@ -1,11 +1,24 @@
-import "./App.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
-function App() {
+import NavBar from "./Components/Navbar/Navbar.jsx";
+
+const App = () => {
   return (
     <>
-      <h1>Hola</h1>
+      <Container fluid>
+        <Row lg="2">
+          <Col>
+            <NavBar />
+          </Col>
+          <Col>
+            <h1>Hello World!</h1>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
-}
+};
 
 export default App;
