@@ -5,6 +5,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import { FaPizzaSlice } from "react-icons/fa";
 
 import ErrorFallback from "../../Errors/handleErrors";
+import ModalComponent from "../Modals/Modal";
+import Register from "../Forms/Register";
 
 const NavBar = ({}) => {
   return (
@@ -21,8 +23,11 @@ const NavBar = ({}) => {
               <Nav className="nav-pills flex-column">
                 <Navbar.Brand href="#home" className="text-warning text-left">
                   <FaPizzaSlice />
-                  Ships Rest
+                  SR
                 </Navbar.Brand>
+                <ModalComponent info={{ variant: "success", text: "Register" }}>
+                  <Register />
+                </ModalComponent>
                 <Nav.Link className="text-dark" href="/about">
                   About
                 </Nav.Link>

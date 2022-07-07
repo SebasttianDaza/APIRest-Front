@@ -7,7 +7,7 @@ const Title = ({ title }) => {
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <h1 className="text-warning text-center">{title}</h1>
+        <h1 className="text-warning text-left">{title}</h1>
       </ErrorBoundary>
     </>
   );

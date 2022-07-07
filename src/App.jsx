@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 
 import NavBar from "./Components/Navbar/Navbar.jsx";
 import Title from "./Components/Title/Title.jsx";
-
+import Header from "./Components/Header/Header.jsx";
 const App = () => {
   return (
     <>
@@ -13,13 +13,13 @@ const App = () => {
           <Col md lg="2">
             <NavBar />
           </Col>
-          <Col md lg="auto">
+          <Col md lg="9">
             <Container fluid>
               <Row>
                 <Title title="Ships Rest" />
               </Row>
               <Row>
-                <h2>Hello World!</h2>
+                <Header />
               </Row>
             </Container>
           </Col>
