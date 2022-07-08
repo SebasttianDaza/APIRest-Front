@@ -5,22 +5,26 @@ import Col from "react-bootstrap/Col";
 import NavBar from "./Components/Navbar/Navbar.jsx";
 import Title from "./Components/Title/Title.jsx";
 import Header from "./Components/Header/Header.jsx";
+import useMatchMedia from "./Hooks/useMatchMedia.jsx";
+
 const App = () => {
+  const isActive = useMatchMedia();
   return (
     <>
-      <Container className="mt-4">
+      <Container className="mt-2">
         <Row>
-          <Col md lg="2">
+          <Col xs={6}>
             <NavBar />
           </Col>
-          <Col md lg="9">
+          {!isActive && (
+            <Col xs={6}>
+              <Title title="Ships Rest" />
+            </Col>
+          )}
+          <Col md={8}>
             <Container fluid>
-              <Row>
-                <Title title="Ships Rest" />
-              </Row>
-              <Row>
-                <Header />
-              </Row>
+              {isActive ? <Title title="Ships Rest" /> : null}
+              <Header />
             </Container>
           </Col>
         </Row>
