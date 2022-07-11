@@ -41,7 +41,7 @@ const useFetch = () => {
     }
   }, []);
 
-  return [fetchData, fetchState];
+  return [fetchState, fetchData];
 };
 
 export default useFetch;

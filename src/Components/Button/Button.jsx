@@ -5,11 +5,11 @@ import Button from "react-bootstrap/Button";
 import ErrorFallback from "../../Errors/handleErrors";
 
 const AnyButton = ({ settings, text, event }) => {
-  const { variant, className } = settings;
+  const { variant, className, type } = settings;
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Button variant={variant} onClick={event} className={className}>
+        <Button variant={variant} type={type} onClick={event} className={className}>
           {text}
         </Button>
       </ErrorBoundary>

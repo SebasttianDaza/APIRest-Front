@@ -1,6 +1,6 @@
 const headers = {
+  accept: "application/json",
   "Content-Type": "application/json",
-  Accept: "application/json",
 };
 
 const sendRequest = async ({ url, method, body }) => {
