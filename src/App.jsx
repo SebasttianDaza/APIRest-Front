@@ -6,6 +6,7 @@ import NavBar from "./Components/Navbar/Navbar.jsx";
 import Title from "./Components/Title/Title.jsx";
 import Header from "./Components/Header/Header.jsx";
 import useMatchMedia from "./Hooks/useMatchMedia.jsx";
+import Get from "./Components/Main/Get.jsx";
 
 const App = () => {
   const isActive = useMatchMedia();
@@ -25,6 +26,8 @@ const App = () => {
             <Container fluid>
               {isActive ? <Title title="Ships Rest" /> : null}
               <Header />
+              <hr />
+              <Get />
             </Container>
           </Col>
         </Row>

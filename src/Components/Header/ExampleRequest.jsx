@@ -47,8 +47,6 @@ const ExampleRequest = () => {
     }
   }, [show, fecthRequest]);
 
-  console.log(stateRequest);
-
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
