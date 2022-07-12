@@ -6,6 +6,7 @@
     $_Users = new Users();
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
+         $_Request->httpResponseCode($_SERVER['REQUEST_METHOD']);
 
         if(isset($_GET["page"])) {
 

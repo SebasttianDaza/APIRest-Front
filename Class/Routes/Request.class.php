@@ -78,6 +78,19 @@
         public function returnResponseJSON($response) {
             return json_encode($response);
         }
+
+        final public function httpResponseCode($method) {
+            if($method == "OPTIONS") {
+                exit(0);
+            }
+
+            
+            echo header("Access-Control-Allow-Origin: *");
+            echo header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+            echo header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+            echo header("Access-Control-Allow-Credentials: true");
+            echo header("Content-Type: application/json");
+        }
     }
 
 ?>

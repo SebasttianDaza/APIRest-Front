@@ -6,6 +6,7 @@
     $_Sales = new Sales();
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
+         $_Request->httpResponseCode($_SERVER['REQUEST_METHOD']);
 
         if(isset($_GET["page"])) {
 

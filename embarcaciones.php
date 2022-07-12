@@ -2,11 +2,15 @@
     require_once "./Class/Routes/Request.class.php";
     require_once "./Class/Routes/Embarcaciones.class.php";
 
+    //Desabilitar los corss-origin para evitar errores de CORS
+
     $_Request = new Request();
     $_Embarcaciones = new Embarcaciones();
 
+    
     if($_SERVER["REQUEST_METHOD"] == "GET") {
-
+        $_Request->httpResponseCode($_SERVER['REQUEST_METHOD']);
+        
         if(isset($_GET["page"])) {
 
             header("Content-Type: application/json");
