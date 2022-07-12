@@ -25,7 +25,11 @@ const Register = ({}) => {
             <Form.Label>Password</Form.Label>
             <Form.Control type="text" placeholder="Enter password" />
           </Form.Group>
-          <AnyButton variant="success" text="Register" event={handleSubmit} />
+          <AnyButton
+            settings={{ variant: "success", className: "" }}
+            text="Register"
+            event={handleSubmit}
+          />
         </Form>
       </ErrorBoundary>
     </>

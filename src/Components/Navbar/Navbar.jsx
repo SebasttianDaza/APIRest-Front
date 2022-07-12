@@ -21,15 +21,15 @@ const NavBar = ({}) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="nav-pills flex-column">
-                <Navbar.Brand href="#home" className="text-warning text-left">
+                <Navbar.Brand href="#home" className="text-warning text-left mb-3">
                   <FaPizzaSlice />
                   SR
                 </Navbar.Brand>
                 <ModalComponent info={{ variant: "success", text: "Register" }}>
                   <Register />
                 </ModalComponent>
-                <Nav.Link className="text-dark" href="/about">
-                  About
+                <Nav.Link className="text-dark mt-2" href="/Information">
+                  Information
                 </Nav.Link>
                 <Nav.Link className="text-dark" href="/contact">
                   Contact

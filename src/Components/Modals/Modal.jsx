@@ -16,9 +16,10 @@ const ModalComponent = ({ children, info }) => {
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <AnyButton variant={variant} text={text} event={handleShow} />
+        <AnyButton settings={{ variant, className: "" }} text={text} event={handleShow} />
         <Modal show={show} onHide={handleClose}>
-          {children}
+          <Modal.Header closeButton>Register</Modal.Header>
+          <Modal.Body>{children}</Modal.Body>
         </Modal>
       </ErrorBoundary>
     </>
