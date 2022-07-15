@@ -4,7 +4,7 @@
     class Connection implements IConnection {
 
         private $host;
-        private $user;
+        private $username;
         private $password;
         private $database;
         private $connection;
@@ -15,13 +15,19 @@
 
             foreach ($listdate as $key => $value) {
                 $this->host = $value['host'];
-                $this->user = $value['user'];
+                $this->username = $value['user'];
                 $this->password = $value['password'];
                 $this->database = $value['database'];
             }
 
             try {
-                $this->connection = new PDO('mysql:host='.$this->host.';dbname='.$this->database, $this->user, $this->password);
+                $options = array (
+                    PDO::MYSQL_ATTR_SSL_CA => "/etc/ssl/certs/ca-certificates.crt",
+                    PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+                );
+
+                $this->connection = new PDO('mysql:host='.$this->host.';dbname='.$this->database, $this->username, $this->password, $options);
+
             } catch (PDOException $e) {
                 $this->showError($e);
             }

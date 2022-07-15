@@ -1,10 +1,10 @@
 /*Data Base APIRest*/
 
-DROP DATABASE IF EXISTS APIRest;
+/*DROP DATABASE IF EXISTS APIRest;*/
 
-CREATE DATABASE IF NOT EXISTS `APIRest`;
+/*CREATE DATABASE IF NOT EXISTS `APIRest`;*/
 
-USE `APIRest`;
+USE `ships-rest`; 
 
 /* Table Principal */
 
@@ -57,7 +57,6 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
     `lastname` VARCHAR(45) NOT NULL,
     `email` VARCHAR(45) NOT NULL,
     `embarcacionesID` INT(11) NOT NULL,
-    FOREIGN KEY (embarcacionesID) REFERENCES Embarcaciones(id) ON DELETE CASCADE,
     CONSTRAINT UNIQUE (email)
 )  ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -93,8 +92,7 @@ INSERT INTO `usuarios` (
 CREATE TABLE IF NOT EXISTS `sale` (
     `saleID` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `embarcacionesID` INT(11) NOT NULL,
-    `quantity` INT(25) NOT NULL,
-    FOREIGN KEY (embarcacionesID) REFERENCES Embarcaciones(id) ON DELETE CASCADE
+    `quantity` INT(25) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `sale` (
