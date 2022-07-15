@@ -1,12 +1,12 @@
 import { ErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
+import { BasicForm } from "@Components/Forms";
+import { Code } from "@Components/Code";
+import { Loading } from "@Components/Spinners";
 
-import ErrorFallback from "../../Errors/handleErrors";
-import BasicForm from "../Forms/BasicForm";
-import useFetch from "../../Hooks/useFetch";
-import Code from "../Code/Code";
-import Loading from "../Spinners/Loading";
+import { useFetch } from "@/Hooks";
+import { ErrorFallback } from "@/Errors";
 
 const Form = [
   {

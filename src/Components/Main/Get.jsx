@@ -1,13 +1,11 @@
 import { ErrorBoundary } from "react-error-boundary";
 import Container from "react-bootstrap/Container";
 import { useState } from "react";
+import { BasicForm } from "@Components/Forms";
+import { SubTitle, Paragraph } from "@Components/Title";
+import { Code } from "@Components/Code";
 
-import ErrorFallback from "../../Errors/handleErrors";
-import SubTitle from "../Title/Subtitle";
-import Paragraph from "../Title/Paragraph";
-import BasicForm from "../Forms/BasicForm";
-import Code from "../Code/Code";
-import TableBasic from "../Table/TableBasic";
+import { ErrorFallback } from "@/Errors";
 
 const Form = [
   {
@@ -33,10 +31,6 @@ const Form = [
     },
   },
 ];
-
-const Table = [
-    
-]
 
 const Get = ({}) => {
   const [show, setShow] = useState(false);
