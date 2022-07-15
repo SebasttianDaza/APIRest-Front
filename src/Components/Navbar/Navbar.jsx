@@ -3,10 +3,10 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { ErrorBoundary } from "react-error-boundary";
 import { FaPizzaSlice } from "react-icons/fa";
+import { Register } from "@Components/Forms/";
+import { ModalComponent } from "@Components/Modals";
 
-import ErrorFallback from "../../Errors/handleErrors";
-import ModalComponent from "../Modals/Modal";
-import Register from "../Forms/Register";
+import { ErrorFallback } from "@/Errors";
 
 const NavBar = ({}) => {
   return (

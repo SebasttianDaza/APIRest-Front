@@ -8,6 +8,9 @@ const sendRequest = async ({ url, method, body }) => {
     method,
     headers,
     body,
+    mode: "cors",
+    credentials: "same-origin",
+    referrerPolicy: "no-referrer",
   });
 
   if (!response.ok) {

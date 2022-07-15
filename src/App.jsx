@@ -1,12 +1,12 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { Title } from "@Components/Title";
+import NavBar from "@Components/Navbar/Navbar";
+import Header from "@Components/Header/Header";
+import Get from "@Components/Main/Get";
 
-import NavBar from "./Components/Navbar/Navbar.jsx";
-import Title from "./Components/Title/Title.jsx";
-import Header from "./Components/Header/Header.jsx";
-import useMatchMedia from "./Hooks/useMatchMedia.jsx";
-import Get from "./Components/Main/Get.jsx";
+import { useMatchMedia } from "@/Hooks";
 
 const App = () => {
   const isActive = useMatchMedia();
