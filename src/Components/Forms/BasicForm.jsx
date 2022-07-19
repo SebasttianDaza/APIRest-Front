@@ -1,46 +1,36 @@
 import { ErrorBoundary } from "react-error-boundary";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
+import { AnyButton } from "@Components/Button";
 
-import ErrorFallback from "../../Errors/handleErrors";
-import AnyButton from "../Button/Button";
+import { ErrorFallback } from "@/Errors";
 
 /**
- * {
- * type: "Text",
- * label: "",
- * controlId: "",
- * ControlType: {
- *      type: "",
- *   placeholder: "",
- *  }
+ *
+ * It's a component should to receive a object with that properties:
+ * - type: string,
+ * - label: string,
+ * - controlId: string,
+ * - ControlType: {
+ *  - type: string,
+ *  - placeholder: string,
  * }
  *
- *
- * {
- *  type: "Select",
- * label: "",
- * controlId: "",
- * selectSettings: {
- *  ariaLabel: "",
+ *  If the form is a select, the object should have the following properties:
+ *  To change ControlType to SelectSettings,
+ *  selectSettings: {
+ *  ariaLabel: string,
  *  options: [
- *     {
- *        value: "",
- *       text: "",
- *     }
- *  ]
- * }
- * }
+ *      {
+ *        value: string,
+ *        text: string,
+ *      }
+ *    ]
+ *  }
  */
-const BasicForm = ({ inputInfo, event, settings, submit }) => {
-  const { variant, className, text } = settings;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const selected = e.target.querySelector("select").value;
-    submit(selected);
-  };
+const BasicForm = ({ inputInfo, settings, handleSubmit }) => {
+  const { variant, className, text } = settings;
 
   return (
     <>
@@ -72,7 +62,11 @@ const BasicForm = ({ inputInfo, event, settings, submit }) => {
               </Form.Group>
             );
           })}
-          <AnyButton settings={{ variant, className, type: "submit" }} text={text} event={event} />
+          <AnyButton
+            settings={{ variant, className, type: "submit" }}
+            text={text}
+            event={() => {}}
+          />
         </Form>
       </ErrorBoundary>
     </>
@@ -81,9 +75,8 @@ const BasicForm = ({ inputInfo, event, settings, submit }) => {
 
 BasicForm.propTypes = {
   inputInfo: PropTypes.array.isRequired,
-  event: PropTypes.func.isRequired,
   settings: PropTypes.object.isRequired,
-  submit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default BasicForm;

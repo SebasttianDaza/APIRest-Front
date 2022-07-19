@@ -1,7 +1,7 @@
 import { ErrorBoundary } from "react-error-boundary";
 import Container from "react-bootstrap/Container";
 import { useState } from "react";
-import { BasicForm } from "@Components/Forms";
+import { FormOnlySelect } from "@Components/Forms";
 import { SubTitle, Paragraph } from "@Components/Title";
 import { Code } from "@Components/Code";
 
@@ -9,32 +9,26 @@ import { ErrorFallback } from "@/Errors";
 
 const Form = [
   {
-    type: "select",
-    label: "",
-    controlId: "formBasicGet",
-    selectSettings: {
-      ariaLabel: "C",
-      options: [
-        {
-          value: "Embarcaciones",
-          text: `${window.location.origin}/embarcaciones?page=1`,
-        },
-        {
-          value: "Users",
-          text: `${window.location.origin}/users?page=1`,
-        },
-        {
-          value: "Sales",
-          text: `${window.location.origin}/sales?page=1`,
-        },
-      ],
-    },
+    value: "Embarcaciones",
+    text: `${window.location.origin}/embarcaciones?page=1`,
+  },
+  {
+    value: "Users",
+    text: `${window.location.origin}/users?page=1`,
+  },
+  {
+    value: "Sales",
+    text: `${window.location.origin}/sales?page=1`,
   },
 ];
 
 const Get = ({}) => {
   const [show, setShow] = useState(false);
-  console.log(show);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setShow(e.target.value);
+  };
 
   return (
     <>
@@ -45,18 +39,23 @@ const Get = ({}) => {
           By default, every list it has 100 resources. Until this momento there isn&apos;t a way to
           choose a limit. For method GET you don&apos;t need to be authenticated or any token.
         </Paragraph>
-        <BasicForm
-          inputInfo={Form}
-          settings={{
-            variant: "success",
-            text: "Get",
-            className: "mt-2 mb-2 invisible",
-          }}
-          event={() => {}}
-          submit={setShow}
-        />
+        <FormOnlySelect data={Form} state={show} handleChange={handleChange} />
         <Code>
-          <Container />
+          <Container>
+            {show === "Embarcaciones" ? (
+              <>
+                <Paragraph>Embarcaciones:</Paragraph>
+              </>
+            ) : show === "Users" ? (
+              <>
+                <Paragraph>Users:</Paragraph>
+              </>
+            ) : show === "Sales" ? (
+              <>
+                <Paragraph>Sales:</Paragraph>
+              </>
+            ) : null}
+          </Container>
         </Code>
         {/* <TableBasic data={Table} /> */}
       </ErrorBoundary>

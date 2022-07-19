@@ -4,8 +4,8 @@ import Col from "react-bootstrap/Col";
 import { Title } from "@Components/Title";
 import NavBar from "@Components/Navbar/Navbar";
 import Header from "@Components/Header/Header";
-import Get from "@Components/Main/Get";
 
+import { Get } from "@/Page";
 import { useMatchMedia } from "@/Hooks";
 
 const App = () => {

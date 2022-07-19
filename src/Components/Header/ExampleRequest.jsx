@@ -37,6 +37,13 @@ const ExampleRequest = () => {
   const [show, setShow] = useState(false);
   const [stateRequest, fecthRequest] = useFetch();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const selected = e.target.querySelector("select").value;
+    setShow(selected);
+  };
+
   useEffect(() => {
     if (show) {
       fecthRequest({
@@ -58,8 +65,7 @@ const ExampleRequest = () => {
             text: "Request",
             className: "mt-2 mb-2",
           }}
-          event={() => {}}
-          submit={setShow}
+          handleSubmit={handleSubmit}
         />
         <Code>
           <Container>
