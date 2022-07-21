@@ -26,7 +26,7 @@ const FormOnlySelect = ({ data, state, handleChange }) => {
 
 FormOnlySelect.propTypes = {
   data: PropTypes.array.isRequired,
-  state: PropTypes.string.isRequired,
+  state: PropTypes.any.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 

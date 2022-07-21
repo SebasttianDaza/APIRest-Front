@@ -4,26 +4,14 @@ import { useState } from "react";
 import { FormOnlySelect } from "@Components/Forms";
 import { SubTitle, Paragraph } from "@Components/Title";
 import { Code } from "@Components/Code";
+import { TableBasic } from "@Components/Table";
+
+import { ReturnInformation, ReturnInformationTable, ReturnFormData } from "./Utils";
 
 import { ErrorFallback } from "@/Errors";
 
-const Form = [
-  {
-    value: "Embarcaciones",
-    text: `${window.location.origin}/embarcaciones?page=1`,
-  },
-  {
-    value: "Users",
-    text: `${window.location.origin}/users?page=1`,
-  },
-  {
-    value: "Sales",
-    text: `${window.location.origin}/sales?page=1`,
-  },
-];
-
 const Get = ({}) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState("Embarcaciones");
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -39,25 +27,19 @@ const Get = ({}) => {
           By default, every list it has 100 resources. Until this momento there isn&apos;t a way to
           choose a limit. For method GET you don&apos;t need to be authenticated or any token.
         </Paragraph>
-        <FormOnlySelect data={Form} state={show} handleChange={handleChange} />
-        <Code>
+        <FormOnlySelect data={ReturnFormData()} state={show} handleChange={handleChange} />
+        <Code className={"mt-2"}>
           <Container>
             {show === "Embarcaciones" ? (
-              <>
-                <Paragraph>Embarcaciones:</Paragraph>
-              </>
+              <Paragraph>{JSON.stringify(ReturnInformation(show))}</Paragraph>
             ) : show === "Users" ? (
-              <>
-                <Paragraph>Users:</Paragraph>
-              </>
+              <Paragraph>{JSON.stringify(ReturnInformation(show))}</Paragraph>
             ) : show === "Sales" ? (
-              <>
-                <Paragraph>Sales:</Paragraph>
-              </>
+              <Paragraph>{JSON.stringify(ReturnInformation(show))}</Paragraph>
             ) : null}
           </Container>
         </Code>
-        {/* <TableBasic data={Table} /> */}
+        <TableBasic data={ReturnInformationTable(show)} />
       </ErrorBoundary>
     </>
   );
