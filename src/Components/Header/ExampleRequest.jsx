@@ -1,4 +1,5 @@
 import { ErrorBoundary } from "react-error-boundary";
+import ReactJson from "react-json-view";
 import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import { BasicForm } from "@Components/Forms";
@@ -80,10 +81,10 @@ const ExampleRequest = () => {
               />
             ) : stateRequest.data !== null ? (
               stateRequest.data.map((ship) => {
-                return <p key={ship.id}>{JSON.stringify(ship)}</p>;
+                return <ReactJson src={ship} name={false} key={ship.id} />;
               })
             ) : (
-              <p>{JSON.stringify({ status: "Null" })}</p>
+              <ReactJson src={{ status: "Null" }} name={false} />
             )}
           </Container>
         </Code>
