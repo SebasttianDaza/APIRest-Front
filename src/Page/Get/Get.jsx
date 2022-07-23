@@ -1,10 +1,10 @@
 import Container from "react-bootstrap/Container";
-import ReactJson from "react-json-view";
 import { useState } from "react";
 import { FormOnlySelect } from "@Components/Forms";
-import { SubTitle, Paragraph } from "@Components/Title";
+import { SubtitleWithBadge, Paragraph } from "@Components/Title";
 import { Code } from "@Components/Code";
 import { TableBasic } from "@Components/Table";
+import { RenderJson } from "@Components/Json";
 
 import { ReturnInformation, ReturnInformationTable, ReturnFormData } from "./Utils";
 
@@ -18,7 +18,7 @@ const Get = ({}) => {
 
   return (
     <>
-      <SubTitle title="Resources List/Pagination" className="text-dark" />
+      <SubtitleWithBadge title="Resources List/Pagination" className="text-dark" badge="GET" />
       <Paragraph>
         Calling any API endponit with a ID or page will return a resource or a list of resources. By
         default, every list it has 100 resources. Until this momento there isn&apos;t a way to
@@ -28,11 +28,11 @@ const Get = ({}) => {
       <Code className={"mt-2"}>
         <Container>
           {show === "Embarcaciones" ? (
-            <ReactJson src={ReturnInformation(show)} name={false} />
+            <RenderJson src={ReturnInformation(show)} settings={{ name: false }} />
           ) : show === "Users" ? (
-            <ReactJson src={ReturnInformation(show)} name={false} />
+            <RenderJson src={ReturnInformation(show)} settings={{ name: false }} />
           ) : show === "Sales" ? (
-            <ReactJson src={ReturnInformation(show)} name={false} />
+            <RenderJson src={ReturnInformation(show)} settings={{ name: false }} />
           ) : null}
         </Container>
       </Code>

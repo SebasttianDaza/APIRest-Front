@@ -1,0 +1,49 @@
+import { Container } from "react-bootstrap";
+import { SubtitleWithBadge, Paragraph } from "@Components/Title";
+import { FormOnlySelect } from "@Components/Forms";
+import { Code } from "@Components/Code";
+import { RenderJson } from "@Components/Json";
+
+import { ReturnInformation } from "./Utils";
+
+import { useHandleState } from "@/Hooks";
+import { GetLocation } from "@/Utils";
+
+const GetUnit = ({}) => {
+  const { show, handleChange } = useHandleState();
+
+  return (
+    <>
+      <SubtitleWithBadge title="Get Unit" className="text-dark" badge="GET" />
+      <Paragraph>
+        You also can to get a resource for every endpoint. Also you need know the ID of the resource
+        you getting and you&lsquo;re authenticated.
+      </Paragraph>
+      <FormOnlySelect
+        data={[
+          {
+            value: "Embarcaciones",
+            text: `${GetLocation()}embarcaciones?id=1`,
+          },
+          {
+            value: "Users",
+            text: `${GetLocation()}users?id=1`,
+          },
+          {
+            value: "Sales",
+            text: `${GetLocation()}sales?id=1`,
+          },
+        ]}
+        state={show}
+        handleChange={handleChange}
+      />
+      <Code className={"mt-2"}>
+        <Container>
+          <RenderJson src={ReturnInformation(show)} settings={{ name: false }} />
+        </Container>
+      </Code>
+    </>
+  );
+};
+
+export default GetUnit;

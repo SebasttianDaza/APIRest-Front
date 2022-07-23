@@ -1,9 +1,11 @@
-import ReactJson from "react-json-view";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import { SubtitleWithBadge, Paragraph } from "@Components/Title";
 import { FormDisable, FormOnlySelect } from "@Components/Forms";
 import { Code } from "@Components/Code";
+import { RenderJson } from "@Components/Json";
+
+import { ReturnJson } from "./Utils";
 
 const Authentication = () => {
   const [show, setShow] = useState("Body");
@@ -43,24 +45,7 @@ const Authentication = () => {
       />
       <Code className={"mt-2"}>
         <Container>
-          <ReactJson
-            src={
-              show === "Body"
-                ? {
-                    username: "yourusername",
-                    password: "yourpassword",
-                  }
-                : {
-                    status: "ok",
-                    result: {
-                      id: 1,
-                      status: "active",
-                      token: "yourtoken",
-                    },
-                  }
-            }
-            name={false}
-          />
+          <RenderJson src={ReturnJson(show)} settings={{ name: false }} />
         </Container>
       </Code>
     </>

@@ -5,7 +5,7 @@ import { Title } from "@Components/Title";
 import NavBar from "@Components/Navbar/Navbar";
 import Header from "@Components/Header/Header";
 
-import { Get, Authentication } from "@/Page";
+import { Get, Authentication, GetUnit, Post } from "@/Page";
 import { useMatchMedia } from "@/Hooks";
 
 const App = () => {
@@ -27,9 +27,13 @@ const App = () => {
               {isActive ? <Title title="Ships Rest" /> : null}
               <Header />
               <hr />
+              <Authentication />
+              <hr />
               <Get />
               <hr />
-              <Authentication />
+              <GetUnit />
+              <hr />
+              <Post />
             </Container>
           </Col>
         </Row>
