@@ -5,7 +5,7 @@ import { Title } from "@Components/Title";
 import NavBar from "@Components/Navbar/Navbar";
 import Header from "@Components/Header/Header";
 
-import { Get, Authentication, GetUnit, Post, Put } from "@/Page";
+import { Get, Authentication, GetUnit, Post, Put, Delete } from "@/Page";
 import { useMatchMedia } from "@/Hooks";
 
 const App = () => {
@@ -36,6 +36,8 @@ const App = () => {
               <Post />
               <hr />
               <Put />
+              <hr />
+              <Delete />
             </Container>
           </Col>
         </Row>
