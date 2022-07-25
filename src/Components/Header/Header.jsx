@@ -1,15 +1,16 @@
 import { ErrorBoundary } from "react-error-boundary";
+import PropTypes from "prop-types";
 
 import ErrorFallback from "../../Errors/handleErrors";
 import Paragraph from "../Title/Paragraph";
 
 import ExampleRequest from "./ExampleRequest";
 
-const Header = () => {
+const Header = ({ id }) => {
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <header>
+        <header id={id}>
           <Paragraph>
             This is a consumption only API. It has HTTP GET, POST, PUT and DELETE.
           </Paragraph>
@@ -28,6 +29,10 @@ const Header = () => {
       </ErrorBoundary>
     </>
   );
+};
+
+Header.propTypes = {
+  id: PropTypes.string,
 };
 
 export default Header;

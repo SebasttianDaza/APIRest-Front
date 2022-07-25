@@ -14,8 +14,9 @@ const NavBar = ({}) => {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Navbar
           variant="light"
-          className="flex-column align-items-stretch text-warning"
+          className="h-100 flex-column align-items-stretch text-warning border-end"
           expand="md"
+          id="navbar"
         >
           <Container>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -28,14 +29,29 @@ const NavBar = ({}) => {
                 <ModalComponent info={{ variant: "success", text: "Register" }}>
                   <Register />
                 </ModalComponent>
-                <Nav.Link className="text-dark mt-2" href="/Information">
-                  Information
+                <Nav.Link className="text-dark mt-2" href="#header">
+                  Basic
+                  <Nav.Link className="text-dark mt-2" href="/Example">
+                    Example
+                  </Nav.Link>
                 </Nav.Link>
                 <Nav.Link className="text-dark" href="/contact">
-                  Contact
+                  Authentication
                 </Nav.Link>
-                <Nav.Link className="text-dark" href="/portfolio">
-                  Portfolio
+                <Nav.Link className="text-dark" href="/resource">
+                  Resources List
+                </Nav.Link>
+                <Nav.Link className="text-dark" href="/get">
+                  Get resource
+                </Nav.Link>
+                <Nav.Link className="text-dark" href="/post">
+                  Create resource
+                </Nav.Link>
+                <Nav.Link className="text-dark" href="/put">
+                  Update resource
+                </Nav.Link>
+                <Nav.Link className="text-dark" href="#delete">
+                  Delete resource
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>

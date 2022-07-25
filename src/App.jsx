@@ -10,22 +10,30 @@ import { useMatchMedia } from "@/Hooks";
 
 const App = () => {
   const isActive = useMatchMedia();
+
   return (
     <>
-      <Container className="mt-2">
+      <Container className="mt-2" fluid>
         <Row>
-          <Col xs={6}>
-            <NavBar />
-          </Col>
-          {!isActive && (
-            <Col xs={6}>
-              <Title title="Ships Rest" />
+          {isActive && (
+            <Col md={3}>
+              <NavBar />
             </Col>
+          )}
+          {!isActive && (
+            <>
+              <Col xs={6}>
+                <NavBar />
+              </Col>
+              <Col xs={6}>
+                <Title title="Ships Rest" />
+              </Col>
+            </>
           )}
           <Col md={8}>
             <Container fluid>
-              {isActive ? <Title title="Ships Rest" /> : null}
-              <Header />
+              {isActive && <Title title="Ships Rest" />}
+              <Header id="header" />
               <hr />
               <Authentication />
               <hr />
@@ -37,7 +45,7 @@ const App = () => {
               <hr />
               <Put />
               <hr />
-              <Delete />
+              <Delete id="delete" />
             </Container>
           </Col>
         </Row>
