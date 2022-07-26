@@ -5,14 +5,15 @@ import ErrorFallback from "../../Errors/handleErrors";
 import AnyButton from "../Button/Button";
 
 const Register = ({}) => {
-  const handleSubmit = (event) => {
-    console.log(event);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = e.target.elements;
   };
 
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control type="text" placeholder="Enter username" />
@@ -26,9 +27,9 @@ const Register = ({}) => {
             <Form.Control type="text" placeholder="Enter password" />
           </Form.Group>
           <AnyButton
-            settings={{ variant: "success", className: "" }}
+            settings={{ variant: "success", className: "mt-2", type: "submit" }}
             text="Register"
-            event={handleSubmit}
+            event={() => {}}
           />
         </Form>
       </ErrorBoundary>

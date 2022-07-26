@@ -3,9 +3,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Title } from "@Components/Title";
 import NavBar from "@Components/Navbar/Navbar";
-import Header from "@Components/Header/Header";
 
-import { Get, Authentication, GetUnit, Post, Put, Delete } from "@/Page";
+import { Get, Authentication, GetUnit, Post, Put, Delete, Header } from "@/Page";
 import { useMatchMedia } from "@/Hooks";
 
 const App = () => {
@@ -16,9 +15,12 @@ const App = () => {
       <Container className="mt-2" fluid>
         <Row>
           {isActive && (
-            <Col md={3}>
-              <NavBar />
-            </Col>
+            <>
+              <Col md={3} className="position-fixed start-0 h-100 border-end">
+                <NavBar />
+              </Col>
+              <Col md={3} />
+            </>
           )}
           {!isActive && (
             <>
@@ -33,17 +35,17 @@ const App = () => {
           <Col md={8}>
             <Container fluid>
               {isActive && <Title title="Ships Rest" />}
-              <Header id="header" />
+              <Header id="header" idRequest="request" />
               <hr />
-              <Authentication />
+              <Authentication id="authentication" />
               <hr />
-              <Get />
+              <Get id="get" />
               <hr />
-              <GetUnit />
+              <GetUnit id="getunit" />
               <hr />
-              <Post />
+              <Post id="post" />
               <hr />
-              <Put />
+              <Put id="put" />
               <hr />
               <Delete id="delete" />
             </Container>

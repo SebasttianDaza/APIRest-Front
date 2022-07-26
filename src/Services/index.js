@@ -1,1 +1,1 @@
-export { default as sendRequest } from './sendRequest';
+export { default as sendRequest } from "./sendRequest";

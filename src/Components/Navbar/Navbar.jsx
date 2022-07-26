@@ -14,7 +14,7 @@ const NavBar = ({}) => {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Navbar
           variant="light"
-          className="h-100 flex-column align-items-stretch text-warning border-end"
+          className="h-100 flex-column align-items-stretch text-warning"
           expand="md"
           id="navbar"
         >
@@ -31,23 +31,23 @@ const NavBar = ({}) => {
                 </ModalComponent>
                 <Nav.Link className="text-dark mt-2" href="#header">
                   Basic
-                  <Nav.Link className="text-dark mt-2" href="/Example">
-                    Example
-                  </Nav.Link>
                 </Nav.Link>
-                <Nav.Link className="text-dark" href="/contact">
+                <Nav.Link className="text-dark mt-2" href="#request">
+                  Example
+                </Nav.Link>
+                <Nav.Link className="text-dark" href="#authentication">
                   Authentication
                 </Nav.Link>
-                <Nav.Link className="text-dark" href="/resource">
+                <Nav.Link className="text-dark" href="#get">
                   Resources List
                 </Nav.Link>
-                <Nav.Link className="text-dark" href="/get">
+                <Nav.Link className="text-dark" href="#getunit">
                   Get resource
                 </Nav.Link>
-                <Nav.Link className="text-dark" href="/post">
+                <Nav.Link className="text-dark" href="#post">
                   Create resource
                 </Nav.Link>
-                <Nav.Link className="text-dark" href="/put">
+                <Nav.Link className="text-dark" href="#put">
                   Update resource
                 </Nav.Link>
                 <Nav.Link className="text-dark" href="#delete">

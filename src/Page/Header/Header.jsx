@@ -1,12 +1,12 @@
 import { ErrorBoundary } from "react-error-boundary";
 import PropTypes from "prop-types";
 
-import ErrorFallback from "../../Errors/handleErrors";
-import Paragraph from "../Title/Paragraph";
+import Request from "./Request";
 
-import ExampleRequest from "./ExampleRequest";
+import { ErrorFallback } from "@/Errors";
+import { Paragraph } from "@/Components/Title";
 
-const Header = ({ id }) => {
+const Header = ({ id, idRequest }) => {
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -24,7 +24,7 @@ const Header = ({ id }) => {
             a token, with token you&apos;ve use to do all request.
           </Paragraph>
           <hr />
-          <ExampleRequest />
+          <Request idRequest={idRequest} />
         </header>
       </ErrorBoundary>
     </>
@@ -33,6 +33,7 @@ const Header = ({ id }) => {
 
 Header.propTypes = {
   id: PropTypes.string,
+  idRequest: PropTypes.string,
 };
 
 export default Header;
