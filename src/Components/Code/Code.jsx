@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 
 import ErrorFallback from "../../Errors/handleErrors";
 
-const Code = ({ children }) => {
+const Code = ({ children, className }) => {
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <pre className="bg-light border pt-3 pb-2" style={{ height: "300px" }}>
+        <pre className={"bg-light border pt-3 pb-2" + " " + className} style={{ height: "300px" }}>
           <code>{children}</code>
         </pre>
       </ErrorBoundary>
@@ -17,6 +17,7 @@ const Code = ({ children }) => {
 
 Code.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
 export default Code;

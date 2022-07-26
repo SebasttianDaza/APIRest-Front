@@ -33,26 +33,24 @@ import { ErrorFallback } from "@/Errors";
  */
 
 const TableBasic = ({ data }) => {
+  const [thead, tbody] = data;
+
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Table striped bordered hover>
           <thead>
-            {data.thead.map((item, index) => {
-              return (
-                <tr key={index}>
-                  {item.tr.map((th) => {
-                    return <th key={th}>{th}</th>;
-                  })}
-                </tr>
-              );
-            })}
+            <tr>
+              {thead.tr.map((td) => {
+                return <th key={td}>{td}</th>;
+              })}
+            </tr>
           </thead>
           <tbody>
-            {data.tbody.map((item, index) => {
+            {tbody.map((tr) => {
               return (
-                <tr key={index}>
-                  {item.tr.map((td) => {
+                <tr key={tr}>
+                  {tr.map((td) => {
                     return <td key={td}>{td}</td>;
                   })}
                 </tr>
@@ -66,7 +64,7 @@ const TableBasic = ({ data }) => {
 };
 
 TableBasic.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 export default TableBasic;
