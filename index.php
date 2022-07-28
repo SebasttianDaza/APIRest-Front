@@ -34,13 +34,13 @@
       font-family: 'Finlandica', sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="./<?php echo $css; ?>" />
+  <link rel="stylesheet" href="./dist/<?php echo $css; ?>" />
 
 </head>
 
 <body>
   <div id="root"></div>
-  <script type="module" src="./<?php echo $js; ?>"></script>
+  <script type="module" src="./dist/<?php echo $js; ?>"></script>
 </body>
 
 </html>
