@@ -10,4 +10,13 @@ export default defineConfig({
     "@": path.resolve(__dirname, "./src"),
     "@Components": path.resolve(__dirname, "./src/Components"),
   },
+  build: {
+    manifest: true,
+    rollupOptions: {
+      input: "src/main.jsx",
+      output: {
+        format: "cjs",
+      },
+    },
+  },
 });
