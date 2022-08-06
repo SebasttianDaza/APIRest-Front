@@ -8,6 +8,8 @@ import { RenderJson } from "@Components/Json";
 
 import { ReturnJson } from "./Utils";
 
+import { GetLocation } from "@/Utils";
+
 const Authentication = ({ id }) => {
   const [show, setShow] = useState("Body");
 
@@ -26,7 +28,7 @@ const Authentication = ({ id }) => {
               controlId: "disableTextId",
               label: "EndPoint",
               control: "text",
-              placeholder: window.location + "auth",
+              placeholder: `${GetLocation()}auth`,
             },
           ]}
           className="mb-2"

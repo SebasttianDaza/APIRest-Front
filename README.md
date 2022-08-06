@@ -4,16 +4,16 @@
 
 <div align="center">
   <h3>
-    <a href="https://{https://loginphp7.herokuapp.com/}">
+    <a href="https://{https://www.shipsrest.software/}">
       Demo
     </a>
     <span> | </span>
-    <a href="https://{[Repo](https://github.com/SebasttianDaza/LoginPHP)}">
+    <a href="https://{[Repo](https://github.com/SebasttianDaza/APIRest-Front)}">
       Solution
     </a>
     <span> | </span>
-    <a href="https://emprendeyourlifestyle.com/portafolio/">
-      Website
+    <a href="https://www.linkedin.com/in/sebasttiandaza/">
+      LinkedIn
     </a>
   </h3>
 </div>

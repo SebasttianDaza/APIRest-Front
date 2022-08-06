@@ -9,6 +9,7 @@ import { RenderJson } from "@Components/Json";
 
 import { ReturnDataForm } from "./Utils";
 
+import { GetLocation } from "@/Utils";
 import { useFetch } from "@/Hooks";
 import { ErrorFallback } from "@/Errors";
 
@@ -25,8 +26,9 @@ const Request = ({ idRequest }) => {
 
   useEffect(() => {
     if (show) {
+      console.log(`${GetLocation()}${show.toLowerCase()}?pa`);
       fecthRequest({
-        url: `http://localhost/APIRest/${show.toLowerCase()}?page=1`,
+        url: `${GetLocation()}${show.toLowerCase()}?page=1`,
         method: "GET",
         body: null,
       });
@@ -59,9 +61,7 @@ const Request = ({ idRequest }) => {
                   }}
                 />
               ) : stateRequest.data !== null ? (
-                stateRequest.data.map((ship) => {
-                  return <RenderJson key={ship.id} data={ship} settings={{ name: false }} />;
-                })
+                <RenderJson src={stateRequest.data} settings={{ name: false }} />
               ) : (
                 <RenderJson data={stateRequest.data} settings={{ name: false }} />
               )}
