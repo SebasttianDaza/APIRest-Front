@@ -1,14 +1,39 @@
 import { ErrorBoundary } from "react-error-boundary";
 import Form from "react-bootstrap/Form";
+import { useFetch } from "@Hooks";
+import { useState, useEffect } from "react";
+import { GetRegister } from "@Utils";
 
 import ErrorFallback from "../../Errors/handleErrors";
 import AnyButton from "../Button/Button";
 
 const Register = ({}) => {
+  const [register, setRegister] = useState({});
+  const [stateRequest, fecthRequest] = useFetch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = e.target.elements;
+    let data;
+    if (formData.length > 1) {
+      data = {
+        username: formData["formBasicUsername"].value,
+        email: formData["formBasicEmail"].value,
+        password: formData["formBasicPassword"].value,
+      };
+    }
+    setRegister(data);
   };
+
+  useEffect(() => {
+    fecthRequest({
+      url: GetRegister(),
+      method: "POST",
+      body: JSON.stringify(register),
+    });
+  }, [register, fecthRequest]);
+
+  console.log(stateRequest);
 
   return (
     <>

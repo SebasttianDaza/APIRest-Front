@@ -6,11 +6,11 @@ import { Forms } from "@Components/Forms";
 import { Code } from "@Components/Code";
 import { Loading } from "@Components/Spinners";
 import { RenderJson } from "@Components/Json";
+import { useFetch } from "@Hooks";
+import { GetLocation } from "@Utils";
 
 import { ReturnDataForm } from "./Utils";
 
-import { GetLocation } from "@/Utils";
-import { useFetch } from "@/Hooks";
 import { ErrorFallback } from "@/Errors";
 
 const Request = ({ idRequest }) => {
@@ -26,7 +26,6 @@ const Request = ({ idRequest }) => {
 
   useEffect(() => {
     if (show) {
-      console.log(`${GetLocation()}${show.toLowerCase()}?pa`);
       fecthRequest({
         url: `${GetLocation()}${show.toLowerCase()}?page=1`,
         method: "GET",

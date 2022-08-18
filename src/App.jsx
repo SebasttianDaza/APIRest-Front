@@ -3,9 +3,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Title } from "@Components/Title";
 import NavBar from "@Components/Navbar/Navbar";
-
-import { Get, Authentication, GetUnit, Post, Put, Delete, Header } from "@/Page";
-import { useMatchMedia } from "@/Hooks";
+import { Get, Authentication, GetUnit, Post, Put, Delete, Header } from "@Pages";
+import { useMatchMedia } from "@Hooks";
 
 const App = () => {
   const isActive = useMatchMedia();
