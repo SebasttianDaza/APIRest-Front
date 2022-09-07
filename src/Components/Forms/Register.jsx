@@ -25,6 +25,8 @@ const Register = ({}) => {
     setRegister(data);
   };
 
+  console.log(stateRequest);
+
   useEffect(() => {
     fecthRequest({
       url: GetRegister(),
@@ -32,8 +34,6 @@ const Register = ({}) => {
       body: JSON.stringify(register),
     });
   }, [register, fecthRequest]);
-
-  console.log(stateRequest);
 
   return (
     <>
