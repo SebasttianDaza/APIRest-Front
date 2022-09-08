@@ -27,7 +27,7 @@ const Request = ({ idRequest }) => {
   useEffect(() => {
     if (show) {
       fecthRequest({
-        url: `${GetLocation()}${show.toLowerCase()}?page=1`,
+        url: `${GetLocation()}${show.toLowerCase()}/1`,
         method: "GET",
         body: null,
       });

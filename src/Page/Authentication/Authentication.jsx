@@ -28,7 +28,7 @@ const Authentication = ({ id }) => {
               controlId: "disableTextId",
               label: "EndPoint",
               control: "text",
-              placeholder: `${GetLocation()}auth`,
+              placeholder: `${GetLocation()}auth/`,
             },
           ]}
           className="mb-2"

@@ -25,15 +25,15 @@ const GetUnit = ({ id }) => {
           data={[
             {
               value: "Embarcaciones",
-              text: `${GetLocation()}embarcaciones?id=1`,
+              text: `${GetLocation()}ship/1`,
             },
             {
               value: "Users",
-              text: `${GetLocation()}users?id=1`,
+              text: `${GetLocation()}user/1`,
             },
             {
               value: "Sales",
-              text: `${GetLocation()}sales?id=1`,
+              text: `${GetLocation()}sale/1`,
             },
           ]}
           state={show}

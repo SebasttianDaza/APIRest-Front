@@ -7,15 +7,15 @@ const Form = [
       ariaLabel: "Choose request type",
       options: [
         {
-          value: "Embarcaciones",
-          text: "Embarcaciones",
+          value: "ships",
+          text: "Ships",
         },
         {
-          value: "Users",
+          value: "users",
           text: "Users",
         },
         {
-          value: "Sales",
+          value: "sales",
           text: "Sales",
         },
       ],

@@ -2,7 +2,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import Spinner from "react-bootstrap/Spinner";
 import PropTypes from "prop-types";
 
-import ErrorFallback from "../../Errors/handleErrors";
+import { ErrorFallback } from "@/Errors";
 
 const Loading = ({ settings }) => {
   const { variant, text, className, animation } = settings;
