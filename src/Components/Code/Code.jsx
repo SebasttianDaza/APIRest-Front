@@ -1,7 +1,7 @@
 import { ErrorBoundary } from "react-error-boundary";
 import PropTypes from "prop-types";
 
-import ErrorFallback from "../../Errors/handleErrors";
+import { ErrorFallback } from "@/Errors";
 
 const Code = ({ children, className }) => {
   return (

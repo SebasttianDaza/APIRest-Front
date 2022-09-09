@@ -2,7 +2,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 
-import ErrorFallback from "../../Errors/handleErrors";
+import { ErrorFallback } from "@/Errors";
 
 const AnyButton = ({ settings, text, event }) => {
   const { variant, className, type } = settings;

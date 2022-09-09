@@ -25,15 +25,15 @@ const Delete = ({ id }) => {
           data={[
             {
               value: "Embarcaciones",
-              text: `${GetLocation()}embarcaciones`,
+              text: `${GetLocation()}ships/`,
             },
             {
               value: "Users",
-              text: `${GetLocation()}users`,
+              text: `${GetLocation()}users/`,
             },
             {
               value: "Sales",
-              text: `${GetLocation()}sales`,
+              text: `${GetLocation()}sales/`,
             },
           ]}
           state={show}

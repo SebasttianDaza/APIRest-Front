@@ -2,9 +2,9 @@ import { ErrorBoundary } from "react-error-boundary";
 import PropTypes from "prop-types";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
+import { AnyButton } from "@Components/Button";
 
-import ErrorFallback from "../../Errors/handleErrors";
-import AnyButton from "../Button/Button";
+import { ErrorFallback } from "@/Errors";
 
 const ModalComponent = ({ children, info }) => {
   const [show, setShow] = useState(false);
